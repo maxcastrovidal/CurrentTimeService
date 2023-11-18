@@ -18,7 +18,7 @@ namespace CurrentTimeService
 
             app.UseHttpsRedirection();
 
-            //Obtener uct
+            //Obtener uct.
             app.MapGet("/time/uct", () => Results.Ok(DateTime.UtcNow));
 
             app.Run();
