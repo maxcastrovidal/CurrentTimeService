@@ -8,7 +8,6 @@ on:
 
 env:
   AZURE_WEBAPP_NAME: current-time-service-maxcv
-  : "./publish"
 
 jobs:
   publish:
