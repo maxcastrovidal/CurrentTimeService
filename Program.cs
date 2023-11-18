@@ -1,3 +1,5 @@
+//https://www.youtube.com/watch?v=QP0pi7xe24s&t=270s
+
 namespace CurrentTimeService
 {
     public class Program
@@ -18,8 +20,10 @@ namespace CurrentTimeService
 
             app.UseHttpsRedirection();
 
-            //Obtener uct..
+            //Obtener uct.
             app.MapGet("/time/uct", () => Results.Ok(DateTime.UtcNow));
+
+            app.MapGet("/hola", () => Results.Ok("Hola Mundo"));
 
             app.Run();
         }
