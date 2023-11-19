@@ -4,14 +4,17 @@
 name: Build and deploy ASP.Net Core app to Azure Web App - current-time-service-maxcv
 
 on:
-  push:
-    branches:
-      - master
+  #push:
+  #  branches:
+  #    - master
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    env:
+      BUILD_CONFIG: 'Release'
 
     steps:
       - uses: actions/checkout@v4
@@ -23,10 +26,13 @@ jobs:
           include-prerelease: true
 
       - name: Build with dotnet
-        run: dotnet build --configuration Release
+        run: dotnet build --configuration $BUILD_CONFIG
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish -c $BUILD_CONFIG -o ${{env.DOTNET_ROOT}}/myapp
+
+      - name: run tests
+        run: dotnet test --configuration $BUILD_CONFIG --logger "trx;LogFileName=test-results.trx" || true
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
