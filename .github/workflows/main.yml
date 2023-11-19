@@ -49,6 +49,9 @@ jobs:
           reporter: dotnet-trx
           fail-on-error: true  
 
+      - name: SonarQube Scan
+        uses: sonarsource/sonarqube-scan-action@master
+        
       - name: SonarQube Quality Gate Check
       # You may pin to the exact commit or the version.
       # uses: SonarSource/sonarqube-quality-gate-action@d304d050d930b02a896b0f85935344f023928496
