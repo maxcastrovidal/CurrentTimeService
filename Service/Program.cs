@@ -24,6 +24,7 @@ namespace CurrentTimeService
             app.MapGet("/time/uct", () => Results.Ok(DateTime.UtcNow));
 
             app.MapGet("/hola", () => Results.Ok("Hola Mundo"));
+            app.MapGet("/hola2", () => Results.Ok("Hola Mundo 2"));
 
             app.Run();
         }
