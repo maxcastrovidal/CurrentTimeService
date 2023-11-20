@@ -1,0 +1,45 @@
+name: Tests 🧪
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+        id-token: write
+        contents: read
+        checks: write      
+
+    env:
+      BUILD_CONFIG: 'Release'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.0.x'
+          include-prerelease: true
+
+      - name: Build with dotnet
+        run: dotnet build --configuration $BUILD_CONFIG
+
+      - name: dotnet publish
+        run: dotnet publish -c $BUILD_CONFIG -o ${{env.DOTNET_ROOT}}/myapp
+
+      - name: run tests
+        run: dotnet test --configuration $BUILD_CONFIG --logger "trx;LogFileName=test-results.trx" || true
+
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: DotNET Tests
+          path: '**/test-results.trx'
+          reporter: dotnet-trx
+          fail-on-error: true  
+                  
+
