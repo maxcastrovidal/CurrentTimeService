@@ -8,8 +8,20 @@ on:
 
 jobs:
   Paso1:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Paso 1
         run: echo 'Paso 1'
+
+  Paso2:
+    runs-on: ubuntu-latest
+    needs: Paso1
+    
+    steps:
+      - name: Paso 2.1
+        run: echo 'Paso 2.1'
+      - name: Paso 2.2
+        run: echo 'Paso 2.2'
+      - name: Paso 2.3
+        run: echo 'Paso 2.3'        
