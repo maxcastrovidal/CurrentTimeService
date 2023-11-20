@@ -12,4 +12,4 @@ jobs:
 
     steps:
       - name: Paso 1
-        run: echo paso 1
+        run: echo 'Paso 1'
