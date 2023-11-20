@@ -1,0 +1,15 @@
+name: Flows ➡️
+
+on:
+  #push:
+  #  branches:
+  #    - master
+  workflow_dispatch:
+
+jobs:
+  Paso1:
+    runs-on: windows-latest
+
+    steps:
+      - name: Paso 1
+        run: echo paso 1
